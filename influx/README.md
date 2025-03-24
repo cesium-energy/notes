@@ -10,6 +10,17 @@
 - **Windows**  
   Download and install [Influx CLI](https://docs.influxdata.com/influxdb/v2/reference/cli/influx/?t=Windows#download-from-your-browser)
 
+## Setup fresh InfluxDB Installation
+```shell
+influx setup \
+  --host http://<HOST>:8086
+  --org local \
+  --bucket local \
+  --username admin \
+  --password 123456789 \
+  --force
+```
+
 ## Defining a connection
 ```shell
 influx config create --config-name <CONFIG_FRIENDLY_NAME> \
