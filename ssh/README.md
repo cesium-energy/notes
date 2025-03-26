@@ -4,6 +4,16 @@
 ssh -i identity_file user@host -p port
 ```
 
+Remote host idenification failed
+```
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+```
+```shell
+ssh-keygen -f '~/.ssh/known_hosts' -R '<IP OR HOSTNAME>'
+```
+
 ## SCP
 ```shell
 # General syntax
