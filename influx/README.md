@@ -12,8 +12,8 @@
 
 ## Setup fresh InfluxDB Installation
 ```shell
-influx setup \
-  --host http://<HOST>:8086
+influx setup --name CONFIG_FRIENDLY_NAME \
+  --host http://HOST:8086 \
   --org local \
   --bucket local \
   --username admin \
@@ -23,10 +23,10 @@ influx setup \
 
 ## Defining a connection
 ```shell
-influx config create --config-name <CONFIG_FRIENDLY_NAME> \
-  --host-url http://<IP>:8086 \
-  --org <ORGANIZATION> \
-  --token <TOKEN> \
+influx config create --config-name CONFIG_FRIENDLY_NAME \
+  --host-url http://IP:8086 \
+  --org ORGANIZATION \
+  --token TOKEN \
   --active
 ```
 This command creates a new entry in `~/.influxdbv2/configs` file.
@@ -63,7 +63,7 @@ Create a bucket
 influx bucket create \
   --org my-org \
   --name my-bucket \
-  --retention 1d
+  --retention 30d
 ```
 
 Delete a bucket
@@ -81,7 +81,7 @@ influx query --org my-org --bucket my-bucket 'SELECT * FROM my_measurement'
 # Flux interactive (write query to stdin)
 influx query
 # Flux non-interactive
-influx query --org my-org --bucket my-bucket '<flux query>'
+influx query --org my-org --bucket my-bucket 'flux query'
 ```
 
 Delete based on predicate
