@@ -37,6 +37,21 @@ Switching between active conenctions - [`influx config`](https://docs.influxdata
 influx config CONFIG_NAME
 ```
 
+## User accounts
+Create user
+```shell
+influx user create \
+  --name USERNAME \
+  --password PASSWORD
+```
+
+Change user password
+```shell
+influx user password \
+  --name USERNAME \
+  --password PASSWORD
+```
+
 ### Buckets
 List buckets - [`influx bucket`](https://docs.influxdata.com/influxdb/v2/reference/cli/influx/bucket/)
 ```shell
@@ -53,6 +68,7 @@ influx bucket create \
 
 Delete a bucket
 ```shell
+influx bucket delete --name bucket-name
 influx bucket delete --id bucket-id
 ```
 
