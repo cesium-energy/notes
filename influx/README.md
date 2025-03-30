@@ -55,14 +55,21 @@ influx user password \
 ### Buckets
 List buckets - [`influx bucket`](https://docs.influxdata.com/influxdb/v2/reference/cli/influx/bucket/)
 ```shell
-influx bucket list --org my-org
+influx bucket list --org ORGANIZATION
 ```
 
 Create a bucket
 ```shell
 influx bucket create \
-  --org my-org \
+  --org ORGANIZATION \
   --name my-bucket \
+  --retention 30d
+```
+
+Change bucket retention
+```shell
+influx bucket update \
+  --id bucket-id \
   --retention 30d
 ```
 
@@ -72,22 +79,47 @@ influx bucket delete --name bucket-name
 influx bucket delete --id bucket-id
 ```
 
+## Tokens
+Create a new token for bucket with specified permissions
+```shell
+influx auth create \
+  -d "Token description" \
+  --org ORGANIZATION [permission-flags]
+```
+
+Example:
+```shell
+influx auth create \
+  -d "Token description" \
+  --org ORGANIZATION \
+  --read-bucket bucket-id \
+  --write-bucket bucket-id
+```
+
+Create all access token
+```shell
+influx auth create \
+  -d "Token description" \
+  --org ORGANIZATION \
+  --all-access
+```
+
 ### Querying / manipulating data
 We can use [Flux](https://docs.influxdata.com/flux/v0/) or [InfluxQL](https://docs.influxdata.com/influxdb/v1/query_language/) (SQL-like) to query data.
 
 ```shell
 # InfluxQL
-influx query --org my-org --bucket my-bucket 'SELECT * FROM my_measurement'
+influx query --org ORGANIZATION --bucket my-bucket 'SELECT * FROM my_measurement'
 # Flux interactive (write query to stdin)
 influx query
 # Flux non-interactive
-influx query --org my-org --bucket my-bucket 'flux query'
+influx query --org ORGANIZATION --bucket my-bucket 'flux query'
 ```
 
 Delete based on predicate
 ```shell
 influx delete \
-  --org ORGANIZATION
+  --org ORGANIZATION \
   --bucket BUCKET \
   --start '1970-01-01T00:00:00Z' \
   --stop $(date -u +"%Y-%m-%dT%H:%M:%SZ") \
